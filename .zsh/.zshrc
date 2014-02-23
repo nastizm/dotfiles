@@ -1,23 +1,11 @@
-# users generic .zshrc file for zsh(1)
-alias ll='ls -l'
+# tokyo tyrant server
 alias tt='sudo /opt/local/sbin/ttservctl start'
 
 # python brew
  [[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc"
 
-# path
-# 海賊とドラジェネで切り替え用
-# for kaizoku
-#PATH="/usr/local/mysql/bin:/opt/local/bin:$PATH"
-
-# for dragon
-PATH="/usr/local/bin:$PATH"
-export DYLD_LIBRARY_PATH=/Users/kensuke.nakada/opt/mysql/5.5.36/lib
-
-# python
-#VIRTUALENVWRAPPER_PYTHON=/Users/kensuke.nakada/.pythonbrew/pythons/Python-2.7.3/bin/python
-#export WORKON_HOME=$HOME/.virtualenvs
-#source `which virtualenvwrapper.sh`
+PATH="/usr/local/bin:~/opt/mysql/5.5.36/bin:$PATH"
+export DYLD_LIBRARY_PATH=~/opt/mysql/5.5.36/lib
 
 ## Environment variable configuration
 #
@@ -156,7 +144,7 @@ alias df="df -h"
 
 alias su="su -l"
 
-
+#
 ## terminal configuration
 #
 case "${TERM}" in
@@ -224,5 +212,51 @@ precmd () {
 PROMPT="%{${fg[yellow]}%}%~%{${reset_color}%} 
 [%n]$ "
 RPROMPT="%1(v|%F{green}%1v%f|)"
+#============================
+# command line stack
+# change bindkey C-q
+#============================
+show_buffer_stack() {
+  POSTDISPLAY="
+stack: $LBUFFER"
+  zle push-line-or-edit
+}
+zle -N show_buffer_stack
+setopt noflowcontrol
+bindkey '^Q' show_buffer_stack
 
+#=============================
+# source auto-fu.zsh
+#=============================
+if [ -f ~/dotfiles/submodule/auto-fu/auto-fu.zsh ]; then
+    source ~/dotfiles/submodule/auto-fu/auto-fu.zsh
+    function zle-line-init () {
+        auto-fu-init
+    }
+    zle -N zle-line-init
+    zstyle ':completion:*' completer _oldlist _complete
+fi
+
+#=============================
+# cdr
+#=============================
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+zstyle ':chpwd:*' recent-dirs-max 5000
+zstyle ':chpwd:*' recent-dirs-default yes
+zstyle ':completion:*' recent-dirs-insert both
+
+#=============================
+# zaw-src-cdr
+#=============================
+if [ -f ~/dotfiles/submodule/zaw/zaw.zsh ]; then
+  source ~/dotfiles/submodule/zaw/zaw.zsh
+  zstyle ':filter-select' case-insensitive yes # 絞り込みをcase-insensitiveに
+  bindkey '^gs' zaw-cdr # zaw-cdrをbindkey
+fi
+
+fpath=(~/.zsh/completion $fpath)
+
+autoload -U compinit
+compinit -u
 

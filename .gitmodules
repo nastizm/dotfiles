@@ -1,0 +1,9 @@
+[submodule "submodule/maaato/emacs"]
+	path = submodule/maaato/emacs
+	url = git@github.com:nastizm/maaaato-emacs.d.git
+[submodule "submodule/auto-fu"]
+	path = submodule/auto-fu
+	url = git://github.com/hchbaw/auto-fu.zsh.git
+[submodule "submodule/zaw"]
+	path = submodule/zaw
+	url = git://github.com/zsh-users/zaw

@@ -1,0 +1,13 @@
+[core]
+    excludesfile = ~/.gitignore
+[user]
+	email = kensuke.nakada@gu3.co.jp
+	name = Kensuke Nakada
+[color]
+	ui = auto
+[alias]
+	co = checkout
+	b  = branch
+	s  = status -sb
+	sti = status -sb --ignore-submodules
+
