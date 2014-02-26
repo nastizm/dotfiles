@@ -1,3 +1,7 @@
+## load user .zshrc configuration file
+#
+[ -f ${HOME}/.zsh/.zshrc.mine ] && source ${HOME}/.zsh/.zshrc.mine
+
 # tokyo tyrant server
 alias tt='sudo /opt/local/sbin/ttservctl start'
 
@@ -25,20 +29,7 @@ esac
 #
 autoload colors
 colors
-#case ${UID} in
-#0)
-#    PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') %B%{${fg[red]}%}%/#%{${reset_color}%}%b "
-#    PROMPT2="%B%{${fg[red]}%}%_#%{${reset_color}%}%b "
-#    SPROMPT="%B%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
-#    ;;
-#*)
-#    PROMPT="%{${fg[red]}%}%/%%%{${reset_color}%} "
-#    PROMPT2="%{${fg[red]}%}%_%%%{${reset_color}%} "
-#    SPROMPT="%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
-#    [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
-#        PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
-#    ;;
-#esac
+
 #
 # auto change directory
 #
@@ -153,53 +144,36 @@ screen)
     ;;
 esac
 
+unset LSCOLORS
 case "${TERM}" in
-xterm|xterm-color)
-    export LSCOLORS=exfxcxdxbxegedabagacad
-    export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-    zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
-    ;;
-kterm-color)
-    stty erase '^H'
-    export LSCOLORS=exfxcxdxbxegedabagacad
-    export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-    zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
-    ;;
+xterm)
+  export TERM=xterm-color
+  ;;
 kterm)
-    stty erase '^H'
-    ;;
+  export TERM=kterm-color
+  # set BackSpace control character
+  stty erase
+  ;;
 cons25)
-    unset LANG
-    export LSCOLORS=ExFxCxdxBxegedabagacad
-    export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-    zstyle ':completion:*' list-colors 'di=;34;1' 'ln=;35;1' 'so=;32;1' 'ex=31;1' 'bd=46;34' 'cd=43;34'
-    ;;
-jfbterm-color)
-    export LSCOLORS=gxFxCxdxBxegedabagacad
-    export LS_COLORS='di=01;36:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-    zstyle ':completion:*' list-colors 'di=;36;1' 'ln=;35;1' 'so=;32;1' 'ex=31;1' 'bd=46;34' 'cd=43;34'
-    ;;
+  unset LANG
+  export LSCOLORS=ExFxCxdxBxegedabagacad
+  export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+  zstyle ':completion:*' list-colors \
+    'di=;34;1' 'ln=;35;1' 'so=;32;1' 'ex=31;1' 'bd=46;34' 'cd=43;34'
+  ;;
 esac
 
 # set terminal title including current directory
 #
 case "${TERM}" in
-xterm|xterm-color|kterm|kterm-color)
-    precmd() {
-        echo -ne "\033]0;${USER}@${HOST%%.*}:${PWD}\007"
-    }
-    ;;
+kterm*|xterm*)
+    export LSCOLORS=ExFxCxdxBxegedabagacad
+    export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+    export ZLS_COLORS=$LS_COLORS
+    zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+  ;;
 esac
 
-
-## load user .zshrc configuration file
-#
-[ -f ${HOME}/.zshrc.mine ] && source ${HOME}/.zshrc.mine
-
-# git
-#autoload bashcompinit
-#bashcompinit
-#source ~/.git-completion.sh
 
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' formats '(%s)-[%b]'
@@ -212,6 +186,8 @@ precmd () {
 PROMPT="%{${fg[yellow]}%}%~%{${reset_color}%} 
 [%n]$ "
 RPROMPT="%1(v|%F{green}%1v%f|)"
+
+
 #============================
 # command line stack
 # change bindkey C-q
@@ -225,6 +201,7 @@ zle -N show_buffer_stack
 setopt noflowcontrol
 bindkey '^Q' show_buffer_stack
 
+
 #=============================
 # source auto-fu.zsh
 #=============================
@@ -237,6 +214,7 @@ if [ -f ~/dotfiles/submodule/auto-fu/auto-fu.zsh ]; then
     zstyle ':completion:*' completer _oldlist _complete
 fi
 
+
 #=============================
 # cdr
 #=============================
@@ -246,17 +224,19 @@ zstyle ':chpwd:*' recent-dirs-max 5000
 zstyle ':chpwd:*' recent-dirs-default yes
 zstyle ':completion:*' recent-dirs-insert both
 
+
 #=============================
-# zaw-src-cdr
+# zaw
 #=============================
 if [ -f ~/dotfiles/submodule/zaw/zaw.zsh ]; then
   source ~/dotfiles/submodule/zaw/zaw.zsh
-  zstyle ':filter-select' case-insensitive yes # 絞り込みをcase-insensitiveに
-  bindkey '^gs' zaw-cdr # zaw-cdrをbindkey
+  zstyle ':fil-er-select' case-insensitive yes # 絞り込みをcase-insensitiveに
+  bindkey '^xb' zaw-git-branches
+  bindkey '^xd' zaw-cdr
+  bindkey '^xh' zaw-history
 fi
 
 fpath=(~/.zsh/completion $fpath)
-
 autoload -U compinit
 compinit -u
 
