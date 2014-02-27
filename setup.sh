@@ -1,6 +1,18 @@
 #!/bin/sh
 # 管理する場合はこちらに書く
 
+if [ ! -e ~/.tmux.conf ]; then
+  ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
+else
+  echo ".tmux.conf already exists."
+fi
+
+if [ ! -e ~/.zshenv ]; then
+  ln -s ~/dotfiles/.zshenv ~/.zshenv
+else
+  echo ".zshenv already exists."
+fi
+
 if [ ! -e ~/.vimrc ]; then
   ln -s ~/dotfiles/.vimrc ~/.vimrc
 else
