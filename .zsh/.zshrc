@@ -2,9 +2,6 @@
 #
 [ -f ${HOME}/.zsh/.zshrc.mine ] && source ${HOME}/.zsh/.zshrc.mine
 
-# tokyo tyrant server
-alias tt='sudo /opt/local/sbin/ttservctl start'
-
 # python brew
  [[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc"
 
@@ -49,7 +46,7 @@ setopt list_packed
 
 # no remove postfix slash of command line
 #
-setopt noautoremoveslash
+#setopt noautoremoveslash
 
 # no beep sound when complete list displayed
 #

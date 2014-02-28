@@ -3,6 +3,7 @@
 *.swp
 .chpwd-recent-dirs
 .zcompdump
+.zshrc.mine
 
 # 環境依存、コミットしたくない個人的な単体テストするときとかに使ってます
 zsrc
