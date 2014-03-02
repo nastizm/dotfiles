@@ -2,12 +2,6 @@
 #
 [ -f ${HOME}/.zsh/.zshrc.mine ] && source ${HOME}/.zsh/.zshrc.mine
 
-# python brew
- [[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc"
-
-PATH="/usr/local/bin:~/opt/mysql/5.5.36/bin:$PATH"
-export DYLD_LIBRARY_PATH=~/opt/mysql/5.5.36/lib
-
 ## Environment variable configuration
 #
 # LANG
@@ -232,6 +226,17 @@ if [ -f ~/dotfiles/submodule/zaw/zaw.zsh ]; then
   bindkey '^xd' zaw-cdr
   bindkey '^xh' zaw-history
 fi
+
+
+#=============================
+# tmux
+#=============================
+#Start tmux on every shell login
+#https://wiki.archlinux.org/index.php/Tmux#Start_tmux_on_every_shell_login
+#if which tmux 2>&1 >/dev/null; then
+    #if not inside a tmux session, and if no session is started, start a new session
+#    test -z "$TMUX" && (tmux attach || tmux new-session)
+#fi
 
 fpath=(~/.zsh/completion $fpath)
 autoload -U compinit
