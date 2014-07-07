@@ -13,8 +13,9 @@ case ${UID} in
     ;;
 esac
 
+export EDITOR='vim'
 
-## Default shell configuration
+# #Default shell configuration
 #
 # set prompt
 #

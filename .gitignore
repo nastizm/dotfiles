@@ -4,6 +4,9 @@
 .chpwd-recent-dirs
 .zcompdump
 .zshrc.mine
+.project
+.pydevproject
+.local2*
 
 # 環境依存、コミットしたくない個人的な単体テストするときとかに使ってます
 zsrc

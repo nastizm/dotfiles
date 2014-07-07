@@ -1,17 +1,10 @@
 #!/bin/sh
 # 管理する場合はこちらに書く
 
-if [ ! -e ~/.tmux.conf ]; then
-  ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
-else
-  echo ".tmux.conf already exists."
-fi
+for file in `find $HOME/dotfiles -name '.*' | grep -v 'dotfiles/.git$' | perl -nle 'm!dotfiles/(.+)$! and print $1'`; do
+    ln -s $HOME/dotfiles/$file $HOME/$file
+done
 
-if [ ! -e ~/.zshenv ]; then
-  ln -s ~/dotfiles/.zshenv ~/.zshenv
-else
-  echo ".zshenv already exists."
-fi
 
 if [ ! -e ~/.vimrc ]; then
   ln -s ~/dotfiles/.vimrc ~/.vimrc
@@ -42,3 +35,10 @@ if [ ! -d ~/.gitconfig ]; then
 else
   echo ".gitconfig already exists."
 fi
+
+if ! gem list bundler -i; then
+  sudo gem install bundler
+fi
+
+gem install
+
