@@ -16,3 +16,7 @@ memo
 ========
 tmux
 
+todo
+=======
+dmgでインストールしてるものを
+brew cask + Brewfileで管理する
