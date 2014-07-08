@@ -5,6 +5,13 @@ for file in `find $HOME/dotfiles -name '.*' | grep -v 'dotfiles/.git$' | perl -n
     ln -s $HOME/dotfiles/$file $HOME/$file
 done
 
+# brew
+if ! type brew > /dev/null >/dev/null 2>&1; then
+  if [ ! -d /usr/local/bin/ ]; then
+    sudo mkdir /usr/local/bin/
+  fi
+  ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go/install)"
+fi
 
 if [ ! -e ~/.vimrc ]; then
   ln -s ~/dotfiles/.vimrc ~/.vimrc
@@ -39,6 +46,6 @@ fi
 if ! gem list bundler -i; then
   sudo gem install bundler
 fi
+sudo bundle install
 
-gem install
-
+echo "end setup"
