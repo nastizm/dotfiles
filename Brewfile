@@ -10,4 +10,4 @@ install peco
 install tmux
 install reattach-to-user-namespace
 
-
+install go
