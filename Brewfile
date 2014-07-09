@@ -10,4 +10,14 @@ install peco
 install tmux
 install reattach-to-user-namespace
 
+# lang
 install go
+
+# cask
+tap phinze/cask
+install brew-cask
+
+# vagrant
+cask install vagrant
+cask install virtualbox
+

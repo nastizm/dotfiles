@@ -1,4 +1,4 @@
-source .zsh/.zshrc
+source ~/.zsh/.zshrc
 
 ## パス
 export PATH=/usr/local/bin:$PATH
