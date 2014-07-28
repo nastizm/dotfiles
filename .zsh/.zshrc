@@ -46,7 +46,7 @@ setopt list_packed
 # no beep sound when complete list displayed
 #
 setopt nolistbeep
-
+setopt no_beep
 
 ## Keybind configuration
 #
@@ -169,7 +169,7 @@ precmd () {
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 PROMPT="%{${fg[yellow]}%}%~%{${reset_color}%} 
-[%n]$ "
+(*ﾟｰﾟ)< "
 RPROMPT="%1(v|%F{green}%1v%f|)"
 
 
