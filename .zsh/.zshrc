@@ -46,7 +46,7 @@ setopt list_packed
 # no beep sound when complete list displayed
 #
 setopt nolistbeep
-
+setopt no_beep
 
 ## Keybind configuration
 #
@@ -80,13 +80,6 @@ HISTSIZE=50000
 SAVEHIST=50000
 setopt hist_ignore_dups     # ignore duplication command history list
 setopt share_history        # share command history data
-
-
-## Completion configuration
-#
-fpath=(${HOME}/.zsh/functions/Completion ${fpath})
-autoload -U compinit
-compinit
 
 
 ## zsh editor
@@ -176,7 +169,7 @@ precmd () {
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 PROMPT="%{${fg[yellow]}%}%~%{${reset_color}%} 
-[%n]$ "
+(*ﾟｰﾟ)< "
 RPROMPT="%1(v|%F{green}%1v%f|)"
 
 
@@ -203,8 +196,43 @@ if [ -f ~/dotfiles/submodule/auto-fu/auto-fu.zsh ]; then
         auto-fu-init
     }
     zle -N zle-line-init
-    zstyle ':completion:*' completer _oldlist _complete
+    zstyle ':auto-fu:highlight' input bold
+    zstyle ':auto-fu:highlight' completion fg=white
+    zstyle ':auto-fu:var' postdisplay ''
+
+    function afu+cancel () {
+        afu-clearing-maybe
+        ((afu_in_p == 1)) && { afu_in_p=0; BUFFER="$buffer_cur" }
+    }
+    function bindkey-advice-before () {
+        local key="$1"
+        local advice="$2"
+        local widget="$3"
+        [[ -z "$widget" ]] && {
+            local -a bind
+            bind=(`bindkey -M main "$key"`)
+            widget=$bind[2]
+        }
+        local fun="$advice"
+        if [[ "$widget" != "undefined-key" ]]; then
+            local code=${"$(<=(cat <<"EOT"
+                function $advice-$widget () {
+                    zle $advice
+                    zle $widget
+                }
+                fun="$advice-$widget"
+EOT
+            ))"}
+            eval "${${${code//\$widget/$widget}//\$key/$key}//\$advice/$advice}"
+        fi
+        zle -N "$fun"
+        bindkey -M afu "$key" "$fun"
+    }
+    bindkey-advice-before "^G" afu+cancel
+    bindkey-advice-before "^[" afu+cancel
+    bindkey-advice-before "^J" afu+cancel afu+accept-line
 fi
+
 
 
 #=============================
