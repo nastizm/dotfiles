@@ -41,7 +41,7 @@ setopt list_packed
 
 # no remove postfix slash of command line
 #
-#setopt noautoremoveslash
+setopt noautoremoveslash
 
 # no beep sound when complete list displayed
 #

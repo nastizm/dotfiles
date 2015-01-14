@@ -1,8 +1,8 @@
 [core]
     excludesfile = ~/.gitignore
 [user]
-	email = kensuke.nakada@gu3.co.jp
-	name = Kensuke Nakada
+	email = nastizm@gmail.com
+	name = nastizm
 [color]
 	ui = auto
 [alias]

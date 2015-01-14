@@ -1,5 +1,5 @@
 # update
-upgrade
+#upgrade
 
 # shell
 install zsh
@@ -21,3 +21,6 @@ install brew-cask
 cask install vagrant
 cask install virtualbox
 
+# ag
+install the_platinum_searcher
+install the_silver_searcher
