@@ -3,9 +3,15 @@
 
 TAPS=(
     peco/peco
+    homebrew/binary
+    homebrew/versions
 )
 
 FORMULAS=(
+    mysql56
+    docker
+    boot2docker
+    git
     caskroom/cask/brew-cask
     zsh
     peco
@@ -15,11 +21,12 @@ FORMULAS=(
     brew-cask
     the_platinum_searcher
     the_silver_searcher
+    pyenv  # python
 )
 
 CASKS=(
-    vagrant
-    virtualbox
+    java
+    sequel-pro
 )
 
 echo "update brew..."
