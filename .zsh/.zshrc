@@ -225,7 +225,7 @@ bindkey '^Q' show_buffer_stack
 #            ))"}
 #            eval "${${${code//\$widget/$widget}//\$key/$key}//\$advice/$advice}"
 #        fi
-##        zle -N "$fun"
+#        zle -N "$fun"
 #        bindkey -M afu "$key" "$fun"
 #    }
 #    bindkey-advice-before "^G" afu+cancel

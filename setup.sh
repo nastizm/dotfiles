@@ -10,9 +10,9 @@ if ! type brew > /dev/null >/dev/null 2>&1; then
   if [ ! -d /usr/local/bin/ ]; then
     sudo mkdir /usr/local/bin/
   fi
-  ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go/install)"
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
-brew bundle
+sh homebrew.sh
 
 if [ ! -e ~/.vimrc ]; then
   ln -s ~/dotfiles/.vimrc ~/.vimrc
