@@ -44,6 +44,10 @@ else
   echo ".gitconfig already exists."
 fi
 
+if [ ! -d ~/.gitconfig.local ]; then
+  ln -s ~/dotfiles/.gitconfig.local ~/.gitconfig.local
+fi
+
 if ! gem list bundler -i; then
   sudo gem install bundler
 fi
