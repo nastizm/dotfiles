@@ -4,6 +4,7 @@
 .chpwd-recent-dirs
 .zcompdump
 .zshrc.mine
+.gitconfig.local
 .project
 .pydevproject
 .local2*

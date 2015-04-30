@@ -1,8 +1,7 @@
 [core]
     excludesfile = ~/.gitignore
-[user]
-	email = nastizm@gmail.com
-	name = nastizm
+[include]
+    path = ~/.gitconfig.local
 [color]
 	ui = auto
 [alias]
@@ -10,4 +9,5 @@
 	b  = branch
 	s  = status -sb
 	sti = status -sb --ignore-submodules
+        p = !git push origin `git rev-parse --abbrev-ref HEAD`
 
