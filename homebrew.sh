@@ -5,12 +5,14 @@ TAPS=(
     peco/peco
     homebrew/binary
     homebrew/versions
+    motemen/ghq
 )
 
 FORMULAS=(
     mysql56
     docker
     boot2docker
+    docker-compose
     git
     caskroom/cask/brew-cask
     zsh
@@ -22,6 +24,7 @@ FORMULAS=(
     the_platinum_searcher
     the_silver_searcher
     pyenv  # python
+    ghq
 )
 
 CASKS=(
