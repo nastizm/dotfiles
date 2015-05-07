@@ -27,6 +27,7 @@ FORMULAS=(
 CASKS=(
     java
     sequel-pro
+    virtualbox
 )
 
 echo "update brew..."
