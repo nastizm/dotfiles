@@ -24,6 +24,7 @@ FORMULAS=(
     the_platinum_searcher
     the_silver_searcher
     pyenv  # python
+    pyenv-virtualenv
     ghq
 )
 
