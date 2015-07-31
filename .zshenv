@@ -11,3 +11,6 @@ export LANG=ja_JP.UTF-8
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+# homebrew
+export HOMEBREW_CACHE=~/Library/Caches/Homebrew
+

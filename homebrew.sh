@@ -25,6 +25,7 @@ FORMULAS=(
     the_silver_searcher
     pyenv  # python
     ghq
+    nkf
 )
 
 CASKS=(
