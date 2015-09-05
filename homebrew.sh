@@ -28,6 +28,7 @@ FORMULAS=(
     ghq
     scala
     sbt
+    nkf
 )
 
 CASKS=(
