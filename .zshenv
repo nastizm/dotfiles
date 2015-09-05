@@ -11,3 +11,6 @@ export LANG=ja_JP.UTF-8
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
