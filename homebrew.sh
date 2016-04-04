@@ -26,6 +26,8 @@ FORMULAS=(
     pyenv  # python
     pyenv-virtualenv
     ghq
+    scala
+    sbt
     nkf
 )
 
