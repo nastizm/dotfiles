@@ -8,6 +8,8 @@
 .project
 .pydevproject
 .local2*
+.idea
+.python-version
 
 # 環境依存、コミットしたくない個人的な単体テストするときとかに使ってます
 zsrc
